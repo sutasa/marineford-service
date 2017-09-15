@@ -20,12 +20,12 @@ import com.mongodb.DBObject;
 @Path("boat")
 public class SeeBoat {
 	@GET
-	@Path("/boat/{name}") 
+	@Path("/findBoat/{name}") 
 	@Produces(MediaType.TEXT_XML)  
 	
 	public String getBoat(@PathParam("name") String name) {
 		DB db = new Connect().mongo();
-		DBCollection table = db.getCollection("boat");
+		DBCollection table = db.getCollection("Boat");
 		
 		BasicDBObject searchQuery = new BasicDBObject();
 		searchQuery.put("maxseat", name);

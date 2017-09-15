@@ -17,7 +17,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
-@Path("boat")
+@Path("Boat")
 public class SeeBoat {
 	@GET
 	@Path("/findBoat/{name}") 

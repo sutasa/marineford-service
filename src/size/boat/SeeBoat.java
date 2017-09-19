@@ -51,5 +51,35 @@ public class SeeBoat {
 		return xml;  
 	}
 	
+	@GET
+	@Path("/findAll") 
+	@Produces(MediaType.TEXT_XML)  
+	public String allBoat() {   
+		
+		DB db = new Connect().mongo();
+		DBCollection table = db.getCollection("Boat");
+		
+		DBCursor cursor = table.find();
+		List<DBObject> myList = cursor.toArray();
+		
+		// create xml
+		String xml = "<?xml version=\"1.0\"?>";
+		xml += "<return>";
+		for (DBObject object : myList) {
+			xml += "<boatDetailed>";
+				xml += "<boat_id>"+object.get("boat_id").toString()+"</boat_id>";
+				xml += "<name>"+object.get("name").toString()+"</name>";
+				xml += "<type>"+object.get("type").toString()+"</type>";
+				xml += "<maxseat>"+object.get("maxseat").toString()+"</maxseat>";
+				
+			xml += "</boatDetailed>";
+		}
+		xml += "</return>";
+		
+		System.out.println(xml);
+		
+		return xml;  
+	} 
+	
 	
 }

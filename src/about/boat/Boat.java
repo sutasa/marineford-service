@@ -1,5 +1,6 @@
 package about.boat;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.FormParam;
@@ -58,8 +59,17 @@ public class Boat {
 		DB db = new Connect().mongo();
 		DBCollection table = db.getCollection("Boat");
 		
-		BasicDBObject searchQuery = new BasicDBObject();
-		searchQuery.put("name", name);
+		
+		
+		ArrayList orList = new ArrayList();
+		orList.add(new BasicDBObject("type",name.toLowerCase()));
+		orList.add(new BasicDBObject("name",name.toLowerCase()));
+		orList.add(new BasicDBObject("boat_id",name.toLowerCase()));
+		orList.add(new BasicDBObject("maxseat",name.toLowerCase()));
+		BasicDBObject searchQuery = new BasicDBObject("$or", orList);
+		
+//		BasicDBObject searchQuery = new BasicDBObject();
+//		searchQuery.put("name", name);
 		
 		//find lecturer id
 //		DBObject dbObject = table.findOne(searchQuery);
@@ -88,7 +98,9 @@ public class Boat {
 		}
 		xml += "</return>";
 		
+		
 		System.out.println(xml);
+		
 		
 		return xml;  
 	}

@@ -149,7 +149,7 @@ public class Boat {
         setQuery.put("$set", document);
 		
 		BasicDBObject searchQuery = new BasicDBObject();
-		searchQuery.put("id", new ObjectId(id));
+		searchQuery.put("_id", new ObjectId(id));
 
 		collection.update(searchQuery, setQuery);
 		
